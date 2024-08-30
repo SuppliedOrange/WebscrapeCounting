@@ -35,7 +35,14 @@ const data: ScrapeQuery[] = [
                 .parentElement.parentElement.children
             ).filter( x => x.tagName == "SPAN")[0].innerText.length.toString()
         }
-    }
+    },
+    {
+        number: 4,
+        url: "https://imgur.com/upload",
+        queryFunction: () => {
+            return document.querySelector(".PopUpActions-textPicker > input").placeholder.split(" ").length
+        }
+    },
 
 ]
 
