@@ -45,7 +45,7 @@ const data: ScrapeQuery[] = [
     },
         {
         number: 5,
-        url: "https://www.smogon.com/dex/sm/formats/ru/INCORRECT_URL",
+        url: "https://www.smogon.com/dex/sm/formats/ru/",
         queryFunction: () => {
             let [hp, atk] = document.querySelector("a[href='/dex/sm/pokemon/bewear/']")
                             .parentElement.parentElement.querySelectorAll(".PokemonAltRow-hp, .PokemonAltRow-atk");
