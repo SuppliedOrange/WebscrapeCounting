@@ -1,3 +1,5 @@
+![CI Test Results](https://github.com/SuppliedOrange/WebscrapeCounting/actions/workflows/node.js.yml/badge.svg)
+
 # WebscrapeCounting
 
 Counting by webscraping.
