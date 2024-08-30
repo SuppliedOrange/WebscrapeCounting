@@ -43,6 +43,15 @@ const data: ScrapeQuery[] = [
             return document.querySelector(".PopUpActions-textPicker > input").placeholder.split(" ").length
         }
     },
+        {
+        number: 5,
+        url: "https://www.smogon.com/dex/sm/formats/ru/INCORRECT_URL",
+        queryFunction: () => {
+            let [hp, atk] = document.querySelector("a[href='/dex/sm/pokemon/bewear/']")
+                            .parentElement.parentElement.querySelectorAll(".PokemonAltRow-hp, .PokemonAltRow-atk");
+            return atk.querySelector("span").innerText - hp.querySelector("span").innerText
+        }
+    },
 
 ]
 
