@@ -101,6 +101,8 @@ npx tsx example.ts
 ## Using the in-built logger
 
 ```ts
+// example.ts
+
 import { Scraper, Logger } from ".";
 // Where you import this from might vary. You just need to reference the top-level index.ts file.
 
@@ -111,7 +113,7 @@ async function main() {
     // You may create a logger class if you want to log data.
     let logger = new Logger({
         // The name also defines the file name, unless you provide a custom file path.
-        name: "logger",
+        name: "mylogger",
         // The level is set to "none" by default.
         level: "debug"
     })
