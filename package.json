@@ -1,0 +1,37 @@
+{
+  "name": "webscrapecounting",
+  "version": "1.0.0",
+  "description": "Counting by webscraping.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "npx tsx test.ts",
+    "start": "npx tsx run_cli.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuppliedOrange/WebscrapeCounting.git"
+  },
+  "keywords": [
+    "webscrape",
+    "fun",
+    "meme",
+    "community",
+    "webscraping",
+    "playwright"
+  ],
+  "author": "suppliedorange",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SuppliedOrange/WebscrapeCounting/issues"
+  },
+  "homepage": "https://github.com/SuppliedOrange/WebscrapeCounting#readme",
+  "dependencies": {
+    "playwright": "^1.46.1",
+    "terminal-kit": "^3.1.1",
+    "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "@types/terminal-kit": "^2.5.6",
+    "tsx": "^4.19.0"
+  }
+}
