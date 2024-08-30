@@ -38,9 +38,12 @@ const data: ScrapeQuery[] = [
     },
     {
         number: 4,
-        url: "https://imgur.com/upload",
+        url: "https://stackoverflow.com/questions/34001917/queryselectorall-with-multiple-conditions-in-javascript",
         queryFunction: () => {
-            return document.querySelector(".PopUpActions-textPicker > input").placeholder.split(" ").length
+            return Array.from( 
+                document.querySelectorAll(".user-action-time > span.relativetime") )
+                .map(x => x.innerText.split(" ")[1] 
+            ).filter( x => x[0] == 4 )[0][0]
         }
     },
         {
