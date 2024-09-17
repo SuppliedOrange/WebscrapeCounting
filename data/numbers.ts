@@ -46,13 +46,20 @@ const data: ScrapeQuery[] = [
             ).filter( x => x[0] == 4 )[0][0]
         }
     },
-        {
+    {
         number: 5,
         url: "https://www.smogon.com/dex/sm/formats/ru/",
         queryFunction: () => {
             let [hp, atk] = document.querySelector("a[href='/dex/sm/pokemon/bewear/']")
                             .parentElement.parentElement.querySelectorAll(".PokemonAltRow-hp, .PokemonAltRow-atk");
             return atk.querySelector("span").innerText - hp.querySelector("span").innerText
+        }
+    },
+    {
+        number: 6,
+        url: "https://pixlr.com/editor/",
+        queryFunction: () => {
+            return document.getElementById("splash-stars").innerText.split(" ").length + 1
         }
     },
 
