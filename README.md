@@ -15,13 +15,15 @@ $ npm install
 $ npx playwright install
 $ # Install all the required modules.
 $
-$ npm run test -- --start=(number) -- --end=(number)
+$ # You may provide args to run tests. See [TestProperties.ts](./src/types/TestProperties.ts) for all additional args
+$ npm run test -- --start=(number) -- --end=(number) -- --headless=(true/false)
+$
 $ # Tests from start (optional) to end (optional).
 $ # Ex. npm run test OR npm run test -- --end=4
 $
 $ npm run start 
 $ # ^ Starts the command line interface. 
-$ # It's best tested and experienced with the CLI.
+$ # It's best experienced with the CLI.
 $ # There's always a log file in /logs, regardless of where you test it.
 ```
 

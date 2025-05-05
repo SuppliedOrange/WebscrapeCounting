@@ -2,13 +2,23 @@ import fs from "fs";
 import data from "./data/numbers.ts";
 import ScrapeQuery from "./src/types/ScrapeQuery.ts";
 import TestResult from "./src/types/TestResult.ts";
+import TestProperties from "./src/types/TestProperties.ts";
 
 async function main() {
 
+    /**
+     * * Get command line arguments
+     */
     let args = getArgs();
+
     let sortedData = data.sort( (a, b) => a.number - b.number )
+
     let startFrom = args.start || sortedData[0].number;
     let endAt = args.end || sortedData[ sortedData.length - 1 ].number;
+
+    let headless = (["true", "false"].includes(args.headless)) ? args.headless === "true" : true;
+    let pageLoadTimeout = args.pageLoadTimeout || null;
+
 
     if (startFrom < sortedData[0].number) {
         throw new Error( `The minimum amount to start from is ${sortedData[0].number}` );
@@ -17,7 +27,7 @@ async function main() {
     let scrapeQueries = sortedData.slice( startFrom - 1, endAt );
 
     const testFiles: string[] = [];
-    const tests: Map<string, (data: ScrapeQuery[]) => Promise<TestResult>> = new Map();
+    const tests: Map<string, (data: ScrapeQuery[], properties?: TestProperties) => Promise<TestResult>> = new Map();
 
     // Find all test files
     fs.readdirSync("./tests/")
@@ -28,7 +38,7 @@ async function main() {
     for (const file of testFiles) {
 
         // Import the functions from all .test.ts files in ./tests/
-        const testFunction: (data: ScrapeQuery[]) => Promise<TestResult> = (
+        const testFunction: (data: ScrapeQuery[], properties?: TestProperties) => Promise<TestResult> = (
              await import(`./tests/${file}`) 
         ).default;
         
@@ -44,7 +54,14 @@ async function main() {
         let [name, testFunction] = test;
 
         console.log(`Running test ${name}`);
-        let result = await testFunction( scrapeQueries );
+
+        let result = await testFunction( scrapeQueries, {
+            scraperConstructorProperties: {
+                headless: headless,
+                pageLoadTimeout: pageLoadTimeout,
+            }
+        } );
+
         console.log(result);
 
         testResults.set( name, result );
