@@ -121,7 +121,7 @@ export default class Scraper {
 
                 if (error.message.includes("Timeout")) {
 
-                    this.error(
+                    this.log(
                         `Timeout of 30s while navigating to ${scrapeQuery.url}. Skipping waiting for page load and executing query function.`
                     );
 
