@@ -6,10 +6,12 @@ import EventEmitter from 'events';
 /**
  * Defines the configuration options for the Scraper class.
  */
-interface ScraperConstructor {
+export interface ScraperConstructor {
     device?: string;
     logger?: Logger;
     name?: string;
+    headless?: boolean;
+    pageLoadTimeout?: number;
 }
 
 /**
@@ -24,6 +26,8 @@ export default class Scraper {
     private browser: Browser;
     private context: BrowserContext;
     private logger: Logger;
+    private headless: boolean;
+    private pageLoadTimeout: number = 15000; // 15 seconds by default
 
     public name: string = "Scraper";
     public feedbacker: EventEmitter = new EventEmitter();
@@ -36,6 +40,9 @@ export default class Scraper {
      * @param {string} props - The configuration options for the scraper {@link ScraperConstructor}.
      * @param {string} props.device - [A playwright device](https://playwright.dev/docs/api/class-playwright#playwright-devices)
      * @param {Logger} props.logger: A Logger object.
+     * @param {string} props.name: The name of the scraper.
+     * @param {boolean} props.headless: Whether to run the browser in headless mode.
+     * @param {number} props.pageLoadTimeout: The timeout for page loading in milliseconds.
      */
     constructor ( props?: ScraperConstructor )
     {
@@ -44,6 +51,8 @@ export default class Scraper {
             if (props.device) this.device = props.device;
             if (props.logger) this.logger = props.logger;
             if (props.name) this.name = props.name;
+            if (props.headless !== undefined) this.headless = props.headless;
+            if (props.pageLoadTimeout) this.pageLoadTimeout = props.pageLoadTimeout;
         }
 
         this.log("Scraper object constructed.");
@@ -60,7 +69,9 @@ export default class Scraper {
         try {
 
             this.log("Launching chromium browser");
-            this.browser = await chromium.launch();
+            this.browser = await chromium.launch({
+                headless: this.headless,
+            });
 
             this.log(`Creating new browser context for device ${this.device}`);
             this.context = await this.browser.newContext(devices[this.device]);
@@ -99,10 +110,31 @@ export default class Scraper {
             this.log(`Navigating to ${scrapeQuery.url}`);
             this.progressUpdate(25);
             try {
-                await this.page.goto( scrapeQuery.url, { waitUntil: "load" } );
+                await this.page.goto( scrapeQuery.url, {
+                    waitUntil: "load",
+                    timeout: this.pageLoadTimeout,
+                } );
             }
             catch (error) {
-                throw new Error(`Error while navigating to ${scrapeQuery.url}\n${error}`);
+
+                // Check if it's a timeout error, and if so, let it progress normally
+
+                if (error.message.includes("Timeout")) {
+
+                    this.log(
+                        `Timeout of 30s while navigating to ${scrapeQuery.url}. Skipping waiting for page load and executing query function.`
+                    );
+
+                }
+
+                // Otherwise, throw an error.
+
+                else {
+
+                    throw new Error(`Error while navigating to ${scrapeQuery.url}\n${error}`);
+
+                }
+                
             }
     
             // Evaluate the query function.

@@ -1,7 +1,8 @@
 import ScrapeQuery from "../src/types/ScrapeQuery";
+import TestProperties from "../src/types/TestProperties";
 import TestResult from "../src/types/TestResult";
 
-export default ( data: ScrapeQuery[] ) => {
+export default ( data: ScrapeQuery[], _properties: TestProperties ) => {
 
     // Get a sorted list of all numbers
     let numbers: number[] = data.map( x => x.number ).sort( (a, b) => a - b );

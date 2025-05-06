@@ -1,7 +1,8 @@
 import ScrapeQuery from "../src/types/ScrapeQuery";
+import TestProperties from "../src/types/TestProperties";
 import TestResult from "../src/types/TestResult";
 
-export default ( data: ScrapeQuery[] ) => {
+export default ( data: ScrapeQuery[], _properties: TestProperties ) => {
 
     let domains: {domain: string; scrapeQuery: ScrapeQuery}[] = [];
     let domainRegex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img;

@@ -38,28 +38,23 @@ const data: ScrapeQuery[] = [
     },
     {
         number: 4,
-        url: "https://stackoverflow.com/questions/34001917/queryselectorall-with-multiple-conditions-in-javascript",
+        url: "https://pokemondb.net/pokedex/charmander",
         queryFunction: () => {
-            return Array.from( 
-                document.querySelectorAll(".user-action-time > span.relativetime") )
-                .map(x => x.innerText.split(" ")[1] 
-            ).filter( x => x[0] == 4 )[0][0]
+            return document.querySelector("td").innerText.substring(3,4)
         }
     },
     {
         number: 5,
-        url: "https://www.smogon.com/dex/sm/formats/ru/",
+        url: "https://apps.apple.com/us/app/nyan-cat-lost-in-space/id433592592",
         queryFunction: () => {
-            let [hp, atk] = document.querySelector("a[href='/dex/sm/pokemon/bewear/']")
-                            .parentElement.parentElement.querySelectorAll(".PokemonAltRow-hp, .PokemonAltRow-atk");
-            return atk.querySelector("span").innerText - hp.querySelector("span").innerText
+            return Math.ceil(document.querySelector(".we-customer-ratings__averages__display").innerText)
         }
     },
     {
         number: 6,
-        url: "https://pixlr.com/editor/",
+        url: "https://dotnet.microsoft.com/en-us/download/dotnet/6.0",
         queryFunction: () => {
-            return document.getElementById("splash-stars").innerText.split(" ").length + 1
+            return document.querySelector("h1").innerText.substring(14)
         }
     },
 
