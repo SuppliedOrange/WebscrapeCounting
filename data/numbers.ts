@@ -59,7 +59,7 @@ const data: ScrapeQuery[] = [
     },
     {
         number: 7,
-        url: "https://en.wikipedia.org/wiki/7",
+        url: "https://wikipedia.org/wiki/7",
         queryFunction: () => {
             return document.querySelector("h1").innerText
         }
