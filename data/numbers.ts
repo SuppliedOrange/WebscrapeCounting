@@ -57,7 +57,13 @@ const data: ScrapeQuery[] = [
             return document.querySelector("h1").innerText.substring(14)
         }
     },
-
+    {
+        number: 7,
+        url: "https://en.wikipedia.org/wiki/7",
+        queryFunction: () => {
+            return document.querySelector("h1").innerText
+        }
+    },
 ]
 
 export default data;
