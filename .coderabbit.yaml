@@ -1,11 +1,8 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 language: "en-US"
-
 reviews:
   path_instructions:
-  
     - path: "./data/**/*"
-    
       instructions: |
         If the modified content is an addition / modification to the scraping dataset, you must ensure those modifications follow these golden rules:
         1. You shall not repeat domains. If google.com has been used, you cannot re-use it. But you may use google.co.uk.
@@ -18,8 +15,6 @@ reviews:
         If you notice that one of these rules are broken you may take 2 actions. The first, if you're unsure if a rule is broken but you think it is, you will mention the rule and add a bold warning to it.
         If you believe that a rule is definitely broken, you will mention that rule as a header and add a warning to it as well.
         In both cases, you must link to the contributing guidelines (the golden rule list) here -> https://github.com/SuppliedOrange/WebscrapeCounting/blob/main/CONTRIBUTING.md
-        
   abort_on_close: false
-  
 chat:
   auto_reply: true
