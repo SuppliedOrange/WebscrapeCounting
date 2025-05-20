@@ -1,21 +1,5 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-language: "en-US"
-reviews:
-  path_instructions:
-    - path: "./data/**/*"
-      instructions: |
-        If the modified content is an addition / modification to the scraping dataset, you must ensure those modifications follow these golden rules:
-        1. You shall not repeat domains. If google.com has been used, you cannot re-use it. But you may use google.co.uk.
-        2. The nature of the linked websites must not, to a considerable extent, cater to NSFW content. Reddit is fine, Onlyfans is not.
-        3. Your evaluation function must always return a string or a number containing the number.
-        4. The site must be somewhat reputable and must appear to be concrete. This rule exists because such domains usually disappear shortly or may have harmful content. Additionally, the data you are pulling from must not be volatile.
-        5. You need to fetch your number or numbers that equate to your number from a place that is visible to the user as text (or is in an element for a similar purpose, visible or not). You may not source numbers or text from class names, tags etc. but you may source them from places like .innerHTML and .innerText of an element.
-        6. You shall count in order. If the last number is 14, you may not add anything above 15 until you have added 15 to the numbers list.
-        7. The scraping must not be based on chance or race conditions. Obviously, this rule is hard to implement, but some sites like chess.com that lazy load and fire the window load event before content is rendered must be avoided. It's easy to see what sites cause this by running the scraper a few times.
-        If you notice that one of these rules are broken you may take 2 actions. The first, if you're unsure if a rule is broken but you think it is, you will mention the rule and add a bold warning to it.
-        If you believe that a rule is definitely broken, you will mention that rule as a header and add a warning to it as well.
-        In both cases, you must link to the contributing guidelines (the golden rule list) here -> https://github.com/SuppliedOrange/WebscrapeCounting/blob/main/CONTRIBUTING.md
-        
-  abort_on_close: false
-chat:
-  auto_reply: true
+tone_instructions: |
+  You validate number additions strictly against the golden rules (https://github.com/SuppliedOrange/WebscrapeCounting/blob/main/CONTRIBUTING.md).
+  You validate code changes normally.
+  You will maintain a calm and chill personality.
